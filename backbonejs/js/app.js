@@ -17,18 +17,18 @@ var Task = Backbone.Model.extend({
     }
 });
 
-var task1 = new Task({
+var task = new Task({
     completed: true
 });
 
-// task1.set('title','test2');
-// var title = task1.get('title');
+// task.set('title','test2');
+// var title = task.get('title');
 // console.log(title);
 
-console.log(task1.toJSON());
-task1.set({title: ''},{validate: true});
-// task1.toggle();
-console.log(task1.toJSON());
+console.log(task.toJSON());
+task.set({title: ''},{validate: true});
+// task.toggle();
+console.log(task.toJSON());
 
 
 // View (表示)
@@ -52,7 +52,7 @@ var TaskView = Backbone.View.extend({
     }
 });
 var taskView = new TaskView({
-    model: task1
+    model: task
 });
 console.log(taskView);
 console.log(taskView.render().el);
@@ -64,11 +64,21 @@ var Tasks = Backbone.Collection.extend({
     model: Task
 });
 
-var tasks= new Tasks([
+var TasksView = Backbone.View.extend({
+    tagName: 'ul',
+    render: function(){
+        this.collection.each(function(task){
+            var taskView = new TaskView({model: task});
+            this.$el.append(taskView.render().el);
+        }, this);
+        return this;
+    }
+});
+
+var tasks = new Tasks([
     {
         title: 'task1',
         completed: true
-
     },
     {
         title: 'task2',
@@ -77,6 +87,8 @@ var tasks= new Tasks([
         title: 'task3',
     },
 ]);
-console.log(tasks.toJSON());
+//console.log(tasks.toJSON());
+var tasksView = new TasksView({collection: tasks});
+$('#tasks').html(tasksView.render().el);
 
 })();
