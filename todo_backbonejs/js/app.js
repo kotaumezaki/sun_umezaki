@@ -1,12 +1,11 @@
 (function(){
 
 var Task = Backbone.Model.extend({
-    //Modelのデフォルト値を定義
-    defaults:{
+    defaults:{ //Modelのデフォルト値を定義
         title: 'do something',
         completed: false
     },
-    validate: function(attrs){
+    validate: function(attrs){ //titleが空だった場合にエラーを出す
         if( _.isEmpty(attrs.title)){
             return 'title must not be empty';
         }
@@ -40,10 +39,10 @@ var TaskView = Backbone.View.extend({
     remove: function(){
         this.$el.remove();　//$el要素を削除する
     },
-    template: _.template($('#task-template').html()),　 //対象となるHTMLのid属性をtemplateに設定
+    template: _.template($('#task-template').html()),
     render: function(){
         var template = this.template(this.model.toJSON());　//Model（JSON形式）を渡してtemplateメソッドを実行
-        this.$el.html(template);　//$el要素にtemplateの実行結果(HTML形式）を渡す
+        this.$el.html(template);　
         return this; 
     }
 
@@ -70,7 +69,7 @@ var TasksView = Backbone.View.extend({
     render: function(){
         this.collection.each(function(task){　//collectionは複数形なのでeachで回す
             var taskView = new TaskView({model: task});　//Viewオブジェクト（単体）の生成
-            this.$el.append(taskView.render().el);　//$el要素にオブジェクトをrender(描画)したel要素を渡す
+            this.$el.append(taskView.render().el);　
         }, this);
         this.updateCount();
         return this;
@@ -109,6 +108,6 @@ var tasks = new Tasks([
 var tasksView = new TasksView({collection: tasks}); //Viewオブジェクト（複数）の生成
 var addTaskView = new AddTaskView({collection: tasks});
 
-$('#tasks').html(tasksView.render().el); //id属性にHTML（オブジェクトをrender(描画)したel要素）を渡す
+$('#tasks').html(tasksView.render().el); 
 
 })();
