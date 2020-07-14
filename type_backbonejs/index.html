@@ -49,12 +49,12 @@
                 </div>     -->
                 <script type="text/javascript">
                     $(document).ready(function(){
-                        var m = new app.model.thumbnail();
-                        console.info(m.toJSON());
+                        var a = new app.model.thumbnail();
+                        console.info(a.toJSON());
                     });
         
                     $(document).ready(function(){
-                        var m = new app.model.thumbnail({
+                        var b = new app.model.thumbnail({
                             id: 4,
                             name: "山田",
                             profile: "2020年 SUN株式会社",
@@ -63,7 +63,7 @@
                             publish: "2020-01-01 10:10:10",
                             gender: "female"
                         });
-                        console.info(m.toJSON());
+                        console.info(b.toJSON());
                     });
         
                     $(document).ready(function(){
