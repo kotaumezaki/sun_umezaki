@@ -1,4 +1,4 @@
-var Thumbnail = Backbone.View.extend({
+var ThumbnailAlert = Backbone.View.extend({
     el: ".img-thumbnail",
 
     events: {
@@ -19,6 +19,7 @@ var Thumbnail = Backbone.View.extend({
 });
 
 $(document).ready(function(){
-    new Thumbnail();
+    new ThumbnailAlert();
     return;
 });
+
