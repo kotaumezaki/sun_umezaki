@@ -73,3 +73,23 @@ app.view.addparagraph = Backbone.View.extend({
         return this;
     }
 })
+
+var m = new app.collection.paragraph;
+m.fetch({
+    reset: true,
+    // success: function(){
+    //     var res = m.create({
+    //         text: "新しい段落を追加しました",
+    //         type: "text"
+    //     });
+    success: function(m){
+        _.each(m.models,function(v){
+            $('#paragraph').append(new app.view.paragraph({model: v}).render().$el);
+        },this);
+        return;
+    }
+});
+
+var v = new app.view.editor({collection: m});
+var a = new app.view.addparagraph({collection: m});
+$('#paragraph').html(a.render().el); 
