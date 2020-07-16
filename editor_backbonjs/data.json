@@ -1,0 +1,25 @@
+{
+    "success": true,
+    "result": [
+        {
+            "id": 1,
+            "text": "1つめの段落です",
+            "type": "text"
+        },
+        {
+            "id": 2,
+            "text": "2つめの段落です",
+            "type": "text"
+        },
+        {
+            "id": 3,
+            "text": "3つめの段落です",
+            "type": "text"
+        },
+        {
+            "id": 4,
+            "text": "4つめの段落です",
+            "type": "text"
+        }
+    ]
+}
