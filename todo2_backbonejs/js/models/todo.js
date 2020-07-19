@@ -1,4 +1,5 @@
 define(["backbone"],function(){
+    //TodoのModel
     var TodoModel = Backbone.Model.extend({
         defaults: {},
         initialize: function(){
