@@ -6,23 +6,22 @@ define(["models/todo","collections/todos","views/todo","backbone"],function(Todo
             "click button#addTodo": "addTodo" 
         },
         initialize: function() { // インスタンス生成時に実行
-            console.dir("[View]TodoListView::initialize()");
+            console.dir("[View]TodoListView::initialize().1");
             this.collection = new TodoCollection(); // Collectionのインスタンスを生成
             this.collection.on("add", this.render); // collectionに対し、addイベントが発生したらrenderを実行するよう設定
             $("#addTodo").show();
         },
         render: function(todo){
-            console.dir("[View]TodoListView::render()");
+            console.dir("[View]TodoListView::render().6");
             var view = new TodoView({ // １つのTodoを表すViewのインスタンスを生成
                 model: todo
             });
             $("#todoList",this.el).append(view.render().el);
         },
         addTodo: function(){　// 「登録」ボタンがクリックされた時に実行
-            var todo;
-            console.dir("[View]TodoListView::addTodo()");
+            console.dir("[View]TodoListView::addTodo().2");
 
-            todo = new TodoModel();　// modelのインスタンスを生成
+            var todo = new TodoModel();　// modelのインスタンスを生成
             todo.on("invalid",this.onInvalid);　// バリデーション失敗時に"invalid"イベントが発生したらonInvalidを実行するよう設定
             todo.set({
                 content: $("#inputTodo").val() //入力内容をmodelにセット
@@ -30,7 +29,7 @@ define(["models/todo","collections/todos","views/todo","backbone"],function(Todo
                 validate: true　//{options}の指定でvalidateを有効に設定
             });
 
-            console.dir('[Model]TodoListModel::isValid()');
+            console.dir('[Model]TodoListModel::isValid().5');
             if(todo.isValid()){
                 this.collection.add(todo); // collectionにmodelを追加
             }
@@ -39,7 +38,7 @@ define(["models/todo","collections/todos","views/todo","backbone"],function(Todo
             console.dir("--End--");
         },
         onInvalid: function(model){ // バリデーションエラー
-            console.dir('[View]TodoListView::onInvalid()');
+            console.dir('[View]TodoListView::onInvalid().error');
             alert(model.validationError);
         }
     });
