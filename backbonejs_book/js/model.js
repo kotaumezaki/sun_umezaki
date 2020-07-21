@@ -10,7 +10,7 @@
         });
     },
     defaults: { //デフォルト値
-        title: '',　
+        title: 'aaa',　
         completed: false
     },
     validate: function(attrs){　//データの検証
@@ -19,6 +19,8 @@
         }
     }
 });
+
+var TodosCollection = Backbone.Collection.extend({model: Todo});
 
 var todo1 = new Todo();
 console.log(todo1.get('title')); //結果は空
@@ -29,7 +31,6 @@ todo1.set('completed',true, {validate: true}); //validateが走る
 console.log(todo1.get('title')); //結果はsetした値
 console.log(todo1.get('completed')); //結果はsetした値
 
-
 var todo2 = new Todo({
     title: 'テストです',　//デフォルト値が書き換えられる
     completed: true,
@@ -38,6 +39,19 @@ var todo2 = new Todo({
 todo2.set('completed',false, {validate: true});
 console.log(todo2);
 
+var todos = new TodosCollection([todo1]);
+console.log(todos.length);
+todos.add(todo2);
+console.log(todos.length);
+todos.remove(todo1);
+console.log(todos.length);
 
+todos.on('add',function(todo){ //イベント(add)の監視
+    console.log(todo.get('title') + (todo.get('completed') ? '○':'×'));
+});
+todos.add({　
+    title: '追加',
+    completed: false
+});
 
 })();
